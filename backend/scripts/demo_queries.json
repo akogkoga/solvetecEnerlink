@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Tecnologia em Sao Paulo",
+    "payload": {"termo": "tecnologia", "estado": "SP", "cidade": "Sao Paulo", "quantidade": 20}
+  },
+  {
+    "name": "Tecnologia em Sorocaba",
+    "payload": {"termo": "tecnologia", "estado": "SP", "cidade": "Sorocaba", "quantidade": 20}
+  },
+  {
+    "name": "Marketing em Sao Paulo",
+    "payload": {"termo": "marketing", "estado": "SP", "cidade": "Sao Paulo", "cnae": "7319003", "quantidade": 20}
+  },
+  {
+    "name": "Contabilidade em Sao Paulo",
+    "payload": {"termo": "contabilidade", "estado": "SP", "cidade": "Sao Paulo", "cnae": "6920601", "quantidade": 20}
+  },
+  {
+    "name": "Contabilidade em Sorocaba",
+    "payload": {"termo": "contabilidade", "estado": "SP", "cidade": "Sorocaba", "cnae": "6920601", "quantidade": 20}
+  },
+  {
+    "name": "MEI em Sao Paulo",
+    "payload": {"termo": "MEI", "estado": "SP", "cidade": "Sao Paulo", "porte": "MEI", "quantidade": 20}
+  },
+  {
+    "name": "LTDA em Sao Paulo",
+    "payload": {"termo": "LTDA", "estado": "SP", "cidade": "Sao Paulo", "quantidade": 20}
+  },
+  {
+    "name": "Busca ampla SP",
+    "payload": {"estado": "SP", "quantidade": 30}
+  }
+]

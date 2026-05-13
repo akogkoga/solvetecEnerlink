@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enerlink App | Gerador de leads</title>
+    <meta name="description" content="Dashboard Enerlink para gerar leads B2B por segmento, cidade e estado.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="theme-dark app-page">
+    <header class="app-header">
+        <a class="brand" href="/" aria-label="Enerlink">
+            <span class="brand-mark"></span>
+            <span>Enerlink</span>
+        </a>
+        <div class="header-actions">
+            <span id="system-status" class="system-pill system-pill-idle">
+                <span></span>
+                Sistema pronto
+            </span>
+            <a class="btn btn-ghost" href="/">Voltar para landing</a>
+            <button class="theme-toggle" type="button" aria-label="Alternar tema" title="Alternar tema">☀️</button>
+        </div>
+    </header>
+
+    <main class="app-shell">
+        <section class="dashboard-hero">
+            <div>
+                <span class="eyebrow">Gerador de leads</span>
+                <h1>Encontre empresas prontas para prospecção</h1>
+                <p>Discovery local, enriquecimento automático e score visual para priorizar as melhores oportunidades.</p>
+            </div>
+            <span id="status-badge" class="badge">Aguardando busca</span>
+        </section>
+
+        <section class="dashboard-grid">
+            <aside class="search-panel">
+                <div class="panel-heading">
+                    <h2>Painel de busca</h2>
+                    <p>Combine segmento, estado, cidade e quantidade.</p>
+                </div>
+
+                <div id="search-tip" class="search-tip">
+                    <strong>Dica inteligente</strong>
+                    <span>Buscas por estado costumam revelar mais empresas qualificadas.</span>
+                </div>
+
+                <form id="lead-form">
+                    <div class="form-group">
+                        <label for="termo">Segmento</label>
+                        <input type="text" id="termo" name="termo" placeholder="Tecnologia, mercados, clínicas" value="tecnologia">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <input type="text" id="estado" name="estado" placeholder="SP" value="SP" maxlength="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" id="cidade" name="cidade" placeholder="São Paulo" value="Sao Paulo">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quantidade">Quantidade</label>
+                            <input type="number" id="quantidade" name="quantidade" value="20" min="1" max="1000">
+                        </div>
+                        <div class="form-group">
+                            <label for="cnae">CNAE</label>
+                            <input type="text" id="cnae" name="cnae" placeholder="Opcional">
+                        </div>
+                    </div>
+
+                    <details class="advanced-fields" id="advanced-fields">
+                        <summary>
+                            Filtros avançados
+                            <span>Nome, porte, situação e natureza jurídica</span>
+                        </summary>
+                        <div class="advanced-content">
+                            <div class="form-group">
+                                <label for="nome">Nome empresarial</label>
+                                <input type="text" id="nome" name="nome" placeholder="LTDA, contabilidade, mercado">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="porte">Porte</label>
+                                    <select id="porte" name="porte">
+                                        <option value="">Todos</option>
+                                        <option value="MEI">MEI</option>
+                                        <option value="ME">ME</option>
+                                        <option value="EPP">EPP</option>
+                                        <option value="DEMAIS">Demais</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="situacao">Situação</label>
+                                    <select id="situacao" name="situacao">
+                                        <option value="">Ativas</option>
+                                        <option value="TODAS">Todas</option>
+                                        <option value="SUSPENSA">Suspensas</option>
+                                        <option value="INAPTA">Inaptas</option>
+                                        <option value="BAIXADA">Baixadas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="natureza_juridica">Natureza jurídica</label>
+                                <input type="text" id="natureza_juridica" name="natureza_juridica" placeholder="Limitada, empresário individual">
+                            </div>
+                        </div>
+                    </details>
+                    <input type="hidden" id="pagina" name="pagina" value="1">
+
+                    <div class="form-actions">
+                        <button type="submit" id="generate-btn" class="btn btn-primary">Gerar Leads</button>
+                        <button type="button" class="btn btn-secondary" data-action="clear-filters">Limpar</button>
+                    </div>
+                </form>
+
+                <div class="demo-buttons" aria-label="Buscas prontas para demonstracao">
+                    <button type="button" class="demo-btn" data-demo="tech-sp">Tecnologia SP</button>
+                    <button type="button" class="demo-btn" data-demo="tech-rj">Tecnologia RJ</button>
+                    <button type="button" class="demo-btn" data-demo="servicos-rj">Serviços RJ</button>
+                    <button type="button" class="demo-btn" data-demo="restaurantes-ba">Restaurantes BA</button>
+                    <button type="button" class="demo-btn" data-demo="clinicas-rs">Clínicas RS</button>
+                    <button type="button" class="demo-btn" data-demo="mercados-mg">Mercados MG</button>
+                    <button type="button" class="demo-btn" data-demo="ltda-pr">LTDA Curitiba</button>
+                </div>
+            </aside>
+
+            <section class="results-panel">
+                <div id="guided-search" class="guided-search">
+                    <div>
+                        <span class="eyebrow">Comece por aqui</span>
+                        <h2>Experimente uma busca validada</h2>
+                        <p>Use exemplos reais para sentir a velocidade do motor antes de criar filtros próprios.</p>
+                    </div>
+                    <div class="guided-actions">
+                        <button type="button" class="guided-card" data-demo="tech-sp">
+                            <strong>Tecnologia em SP</strong>
+                            <span>Empresas de software, sistemas e tecnologia.</span>
+                        </button>
+                        <button type="button" class="guided-card" data-demo="restaurantes-ba">
+                            <strong>Restaurantes em Salvador</strong>
+                            <span>Leads locais para operação comercial.</span>
+                        </button>
+                        <button type="button" class="guided-card" data-demo="clinicas-rs">
+                            <strong>Clínicas em Porto Alegre</strong>
+                            <span>Segmento de saúde e serviços especializados.</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="meta-section" class="metrics-strip">
+                    <div class="metric-card">
+                        <span class="metric-label">Leads</span>
+                        <strong id="meta-returned">-</strong>
+                        <small>empresas encontradas</small>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Tempo</span>
+                        <strong id="meta-time">-</strong>
+                        <small>resposta da busca</small>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Fonte dos dados</span>
+                        <strong id="meta-providers">-</strong>
+                        <small>provider principal</small>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">Encontrados</span>
+                        <strong id="meta-found">-</strong>
+                        <small>base analisada</small>
+                    </div>
+                </div>
+
+                <div id="fallback-banner" class="fallback-banner" hidden>
+                    <div class="fallback-icon">🔍</div>
+                    <div>
+                        <strong>Resultados ajustados para ampliar a busca</strong>
+                        <p id="fallback-message">Ajustamos sua busca automaticamente para encontrar melhores resultados.</p>
+                    </div>
+                </div>
+
+                <div id="meta-errors" class="meta-errors" hidden></div>
+
+                <div id="progress-section" class="progress-section" hidden>
+                    <div class="progress-step active">Consultando base local</div>
+                    <div class="progress-step">Aplicando fallback inteligente</div>
+                    <div class="progress-step">Pontuando oportunidades</div>
+                    <div class="progress-step">Leads prontos</div>
+                </div>
+
+                <div class="results-header">
+                    <div>
+                        <h2>Resultados</h2>
+                        <p>Ordenado por score para colocar os leads mais fortes no topo.</p>
+                    </div>
+                    <span class="results-hint">Melhores leads destacados</span>
+                </div>
+
+                <div class="table-container">
+                    <table id="leads-table">
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>CNAE</th>
+                                <th>Situação</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leads-body">
+                            <tr>
+                                <td colspan="6" class="empty-state">
+                                    <div class="empty-card">
+                                        <strong>Pronto para encontrar empresas reais.</strong>
+                                        <span>Escolha uma busca guiada ou use seus próprios filtros para começar.</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
