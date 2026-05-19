@@ -1,5 +1,6 @@
 """Generic local SQLite discovery provider for Receita Federal data."""
 import logging
+import os
 import re
 import sqlite3
 import time
@@ -13,7 +14,12 @@ from app.services.health_tracker import health_tracker
 
 logger = logging.getLogger("provider.SQLiteLocal")
 
-DB_PATH = Path(__file__).parent.parent.parent / "data" / "empresas.db"
+DB_PATH = Path(
+    os.environ.get(
+        "SQLITE_DB_PATH",
+        Path(__file__).parent.parent.parent / "data" / "empresas.db",
+    )
+)
 REQUIRED_COLUMNS = {
     "cnpj", "razao_social", "cnae_fiscal", "uf", "municipio",
     "situacao", "porte", "telefone", "email",

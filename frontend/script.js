@@ -1,4 +1,10 @@
-const BASE_URL = 'http://localhost:8000';
+const DEFAULT_API_BASE_URL = (
+    ['localhost', '127.0.0.1'].includes(window.location.hostname)
+    && ['5500', '5501'].includes(window.location.port)
+) || window.location.protocol === 'file:'
+    ? 'http://localhost:8000'
+    : '';
+const BASE_URL = window.ENERLINK_API_BASE_URL || DEFAULT_API_BASE_URL;
 const API_URL = `${BASE_URL}/api/v1/leads/generate`;
 const HEALTH_URL = `${BASE_URL}/health`;
 const THEME_KEY = 'enerlink-theme';
